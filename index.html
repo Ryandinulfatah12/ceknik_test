@@ -12,29 +12,38 @@
 
     <section id="results"></section>
   </body>
-  <script src="./lib/nik_parse.min.js"></script>
   <script src="./lib/jquery.min.js"></script>
+  <script src="./lib/nik_parse.min.js"></script>
   <script>
     $("#btnCheck").click(function () {
       var nik = $("#nikInput").val();
-      checkNIK(nik);
-    });
-
-    function checkNIK(nik) {
       nikParse(nik, function (result) {
-        $("#results").append(`
-            <p>STATUS : ${result.status}</p>
-            <p>MESSAGE : ${result.pesan}</p>
-            <hr/>
-            <p>NIK : ${result.data.nik}</p>
-            <p>JK : ${result.data.kelamin}</p>
-            <p>KOTA: ${result.data.kotakab}</p>
-            <p>TTL : ${result.data.lahir}</p>
-
-            <p>Jangan salahgunakan data...ini hanya demo validasi NIK</p>
+        console.log(result);
+        if (result.status == "success") {
+          $("#results").html("");
+          $("#results").append(`
+                <p>STATUS : ${result.status}</p>
+                <p>MESSAGE : ${result.pesan}</p>
+                <hr/>
+                <p>NIK : ${result.data.nik}</p>
+                <p>JK : ${result.data.kelamin}</p>
+                <p>KOTA: ${result.data.kotakab}</p>
+                <p>TTL : ${result.data.lahir}</p>
+    
+                <p>Jangan salahgunakan data...ini hanya demo validasi NIK</p>
             `);
+        } else {
+          $("#results").html("");
+          $("#results").append(`
+                <p>STATUS : ${result.status}</p>
+                <p>MESSAGE : ${result.pesan}</p>
+                <hr/>
+    
+                <p>NIK yang kamu masukan tidak valid</p>
+            `);
+        }
       });
-    }
+    });
 
     //   const nik = "3574020206980003";
   </script>
