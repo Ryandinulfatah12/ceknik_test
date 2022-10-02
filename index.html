@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="nikInput" required />
+    <button type="button" id="btnCheck">Check</button>
+
+    <section id="results"></section>
+  </body>
+  <script src="./nik_parse.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $("#btnCheck").click(function () {
+      var nik = $("#nikInput").val();
+      checkNIK(nik);
+    });
+
+    function checkNIK(nik) {
+      nikParse(nik, function (result) {
+        $("#results").append(`
+            <p>STATUS : ${result.status}</p>
+            <p>MESSAGE : ${result.pesan}</p>
+            <hr/>
+            <p>NIK : ${result.data.nik}</p>
+            <p>JK : ${result.data.kelamin}</p>
+            <p>KOTA: ${result.data.kotakab}</p>
+            <p>TTL : ${result.data.lahir}</p>
+
+            <p>Jangan salahgunakan data...ini hanya demo validasi NIK</p>
+            `);
+      });
+    }
+
+    //   const nik = "3574020206980003";
+  </script>
+</html>
